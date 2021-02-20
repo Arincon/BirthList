@@ -7,3 +7,6 @@
 /BirthList/BirthList/Client/obj
 /BirthList/BirthList/Server/obj
 /BirthList/BirthList/Shared/obj
+/BirthList/BirthList/Client/bin/Debug/net5.0
+/BirthList/BirthList/Server/bin/Debug/net5.0
+/BirthList/BirthList/Shared/bin/Debug/net5.0
