@@ -1,0 +1,44 @@
+﻿@page "/presentlist"
+@using BirthList.Shared
+@inject HttpClient Http
+
+<h1>Lista de Regalos</h1>
+
+<p>Aquí podrás ver la lista de regalos, con sus propiedades, y poder interactuar con ellos. </p>
+
+@if (presents == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Título</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var present in presents)
+            {
+                <tr>
+                    <td>@present.Id</td>
+                    <td>@present.Title</td>
+                    <td>@present.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Present> presents;
+
+    protected override async Task OnInitializedAsync()
+    {
+        presents = await Http.GetFromJsonAsync<List<Present>>("Present");
+    }
+
+}
