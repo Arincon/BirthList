@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/BirthList/.vs/BirthList/v16
+/BirthList/BirthList/Client/obj
+/BirthList/BirthList/Server/obj
+/BirthList/BirthList/Shared/obj
