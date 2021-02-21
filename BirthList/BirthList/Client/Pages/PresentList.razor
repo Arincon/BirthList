@@ -1,19 +1,22 @@
 ﻿@page "/presentlist"
-@using BirthList.Shared
+@using BirthList.Shared;
+@using System.Text.RegularExpressions;
 @inject HttpClient Http
 
 <h1>Lista de Regalos</h1>
 
-<p>Aquí podrás ver la lista de regalos, con sus propiedades, y poder interactuar con ellos. </p>
-
-@if (presents == null)
+<div>
+    <p>Aquí podrás ver la lista de regalos, con sus propiedades, y poder interactuar con ellos. </p>
+    <p>Buscar:<input @bind-value="SearchText" @bind-value:event="oninput" /></p>
+</div>
+@if(!presents.Any())
 {
     <p><em>Loading...</em></p>
 }
 else
 {
 <div class="row">
-    @foreach (var present in presents)
+    @foreach (var present in FilteredPresents)
     {
         if (present.RemainingAmount > 0)
         {
@@ -55,11 +58,17 @@ else
 }
 
 @code {
-    private List<Present> presents;
+    private List<Present> presents = new List<Present>();
+
+    private string _pattern = @"[<>:/\\""|?* ]";
+
+    public string SearchText = "";
 
     protected override async Task OnInitializedAsync()
     {
         presents = await Http.GetFromJsonAsync<List<Present>>("Present/List");
     }
+
+    List<Present> FilteredPresents => presents.Where(p => p.Title.ToLowerInvariant().Contains(SearchText.ToLowerInvariant()) || p.Description.Contains(SearchText.ToLowerInvariant())).ToList();
 
 }

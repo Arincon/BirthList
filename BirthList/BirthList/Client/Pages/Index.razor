@@ -1,144 +1,65 @@
 ﻿@page "/"
+@using BirthList.Shared
+@inject HttpClient Http
 
 <h1>¡Bienvenid@s!</h1>
 
 Ésta es la página creada para gestionar la lista de nacimiento de Bebé1.
 
-<div class="row">
-    <div class="col-md-4">
-        <div class="well well-white mini-profile-widget">
-            <div class="image-container">
-                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="avatar img-responsive" alt="avatar">
-            </div>
-            <div class="details">
-                <h4>John Doe</h4>
-                <hr>
-                <div>Works at Bootdey.com</div>
-                <div>Attended University of Bootdey.com</div>
-                <div>Lives in Miami, Florida</div>
-                <div class="mg-top-10">32 Followers | 120 Following | 18 Posts</div>
-                <p class="mg-top-20">
-                    <a href="javascript:void(0);" class="btn btn-blue">
-                        <i class="fa fa-facebook fa-fw"></i>
-                    </a>
-                    <a href="javascript:void(0);" class="btn btn-info">
-                        <i class="fa fa-twitter fa-fw"></i>
-                    </a>
-                    <a href="javascript:void(0);" class="btn btn-red">
-                        <i class="fa fa-google-plus fa-fw"></i>
-                    </a>
-                </p>
-            </div>
-        </div>
+@if (presents == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        @foreach (var present in presents)
+        {
+            if (present.RemainingAmount > 0)
+            {
+                <a class="col-md-4" href="/present/@present.RowKey">
+                    <div class="well well-white mini-profile-widget">
+                        <div class="image-container">
+                            <img src="@present.ImageLink" class="avatar img-responsive" alt="@present.Title">
+                        </div>
+                        <div class="details">
+                            <h4>@present.Title</h4>
+                            <hr>
+                            <div>@present.Description</div>
+                            <div>Precio orientativo: @present.EstimatedPrice €</div>
+                            <div>Comprados @(present.RequiredAmount-present.RemainingAmount) de @present.RequiredAmount</div>
+                            <div class="mg-top-10"><a target="_blank" href="@present.SampleLink">Link de compra</a></div>
+                        </div>
+                    </div>
+                </a>
+            }
+            else
+            {
+                <div class="col-md-4">
+                    <div class="well well-white mini-profile-widget">
+                        <div class="image-container">
+                            <img src="@present.ImageLink" class="avatar img-responsive" alt="@present.Title">
+                        </div>
+                        <div class="details">
+                            <h4>@present.Title</h4>
+                            <hr>
+                            <div>@present.Description</div>
+                            <div>Comprado!</div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        }
     </div>
+}
 
-    <div class="col-md-4">
-        <div class="well well-light-orange mini-profile-widget">
-            <div class="image-container">
-                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="avatar img-responsive" alt="avatar">
-            </div>
-            <div class="details">
-                <h4>John Doe</h4>
-                <hr>
-                <div>Works at Bootdey.com</div>
-                <div>Attended University of Bootdey.com</div>
-                <div>Lives in Miami, Florida</div>
-                <div class="mg-top-10">32 Followers | 120 Following | 18 Posts</div>
-                <p class="mg-top-20">
-                    <a href="javascript:void(0);" class="btn btn-blue">
-                        <i class="fa fa-facebook fa-fw"></i>
-                    </a>
-                    <a href="javascript:void(0);" class="btn btn-info">
-                        <i class="fa fa-twitter fa-fw"></i>
-                    </a>
-                    <a href="javascript:void(0);" class="btn btn-red">
-                        <i class="fa fa-google-plus fa-fw"></i>
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
+@code {
+    private List<Present> presents;
 
+    protected override async Task OnInitializedAsync()
+    {
+        presents = await Http.GetFromJsonAsync<List<Present>>("Present/List");
+    }
 
-    <div class="col-md-4">
-        <div class="well well-light-pink mini-profile-widget">
-            <div class="image-container">
-                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="avatar img-responsive" alt="avatar">
-            </div>
-            <div class="details">
-                <h4>John Doe</h4>
-                <hr>
-                <div>Works at Bootdey.com</div>
-                <div>Attended University of Bootdey.com</div>
-                <div>Lives in Miami, Florida</div>
-                <div class="mg-top-10">32 Followers | 120 Following | 18 Posts</div>
-                <p class="mg-top-20">
-                    <a href="javascript:void(0);" class="btn btn-blue">
-                        <i class="fa fa-facebook fa-fw"></i>
-                    </a>
-                    <a href="javascript:void(0);" class="btn btn-info">
-                        <i class="fa fa-twitter fa-fw"></i>
-                    </a>
-                    <a href="javascript:void(0);" class="btn btn-red">
-                        <i class="fa fa-google-plus fa-fw"></i>
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="col-md-4">
-        <div class="well well-light-green mini-profile-widget">
-            <div class="image-container">
-                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="avatar img-responsive" alt="avatar">
-            </div>
-            <div class="details">
-                <h4>John Doe</h4>
-                <hr>
-                <div>Works at Bootdey.com</div>
-                <div>Attended University of Bootdey.com</div>
-                <div>Lives in Miami, Florida</div>
-                <div class="mg-top-10">32 Followers | 120 Following | 18 Posts</div>
-                <p class="mg-top-20">
-                    <a href="javascript:void(0);" class="btn btn-blue">
-                        <i class="fa fa-facebook fa-fw"></i>
-                    </a>
-                    <a href="javascript:void(0);" class="btn btn-info">
-                        <i class="fa fa-twitter fa-fw"></i>
-                    </a>
-                    <a href="javascript:void(0);" class="btn btn-red">
-                        <i class="fa fa-google-plus fa-fw"></i>
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="well well-light-blue mini-profile-widget">
-            <div class="image-container">
-                <img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="avatar img-responsive" alt="avatar">
-            </div>
-            <div class="details">
-                <h4>John Doe</h4>
-                <hr>
-                <div>Works at Bootdey.com</div>
-                <div>Attended University of Bootdey.com</div>
-                <div>Lives in Miami, Florida</div>
-                <div class="mg-top-10">32 Followers | 120 Following | 18 Posts</div>
-                <p class="mg-top-20">
-                    <a href="javascript:void(0);" class="btn btn-blue">
-                        <i class="fa fa-facebook fa-fw"></i>
-                    </a>
-                    <a href="javascript:void(0);" class="btn btn-info">
-                        <i class="fa fa-twitter fa-fw"></i>
-                    </a>
-                    <a href="javascript:void(0);" class="btn btn-red">
-                        <i class="fa fa-google-plus fa-fw"></i>
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
+}
