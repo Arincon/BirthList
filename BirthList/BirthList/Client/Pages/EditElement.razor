@@ -1,0 +1,74 @@
+﻿@page "/present/{id}"
+@using BirthList.Shared
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+
+<h1>Información regalo:</h1>
+
+@if (present == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <p>Edición de Regalo: @present.RowKey</p>
+    <img src="@present.ImageLink" class="avatar img-responsive" alt="@present.Title">
+    <p>Nombre: @present.Title</p>
+    <p>Description: @present.Description</p>
+    <p>Precio orientativo: XXX €</p>
+    <p>Comprados @(present.RequiredAmount - present.RemainingAmount) de @present.RequiredAmount</p>
+    <p class="mg-top-10"><a target="_blank" href="@present.SampleLink">Link de compra</a></p>
+
+    <EditForm Model="@present" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <p>
+            <label>
+                ¿Cuántos has comprado?:
+                <InputSelect @bind-Value="present.NewlyBought">
+                    <option value="">Elige la cantidad...</option>
+                    @for (var i = 0; i <= present.RemainingAmount; i++)
+                        {
+                        <option value="@i">@i</option>
+                        }
+                </InputSelect>
+            </label>
+        </p>
+        <button type="submit">Informar a los padres...</button>
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private Present present;
+
+    protected override async Task OnInitializedAsync()
+    {
+        present = await Http.GetFromJsonAsync<Present>($"Present/{Id}");
+        present.NewlyBought = 0;
+    }
+
+
+    private async Task HandleValidSubmit()
+    {
+        var errors = new Dictionary<string, List<string>>();
+
+        if (errors.Count() > 0)
+        {
+            // aaaaa
+        }
+        else
+        {
+            // Process the form
+            var result = await Http.PutAsJsonAsync<Present>($"Present/{Id}", present);
+            if (result.IsSuccessStatusCode)
+            {
+                NavigationManager.NavigateTo("/presentlist");
+            }
+        }
+    }
+
+}

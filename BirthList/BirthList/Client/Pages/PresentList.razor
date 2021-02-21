@@ -12,25 +12,46 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Título</th>
-                <th>Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var present in presents)
-            {
-                <tr>
-                    <td>@present.Id</td>
-                    <td>@present.Title</td>
-                    <td>@present.Description</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="row">
+    @foreach (var present in presents)
+    {
+        if (present.RemainingAmount > 0)
+        {
+            <a class="col-md-4" href="/present/@present.RowKey">
+                <div class="well well-white mini-profile-widget">
+                    <div class="image-container">
+                        <img src="@present.ImageLink" class="avatar img-responsive" alt="@present.Title">
+                    </div>
+                    <div class="details">
+                        <h4>@present.Title</h4>
+                        <hr>
+                        <div>@present.Description</div>
+                        <div>Precio orientativo: XXX €</div>
+                        <div>Comprados @(present.RequiredAmount-present.RemainingAmount) de @present.RequiredAmount</div>
+                        <div class="mg-top-10"><a target="_blank" href="@present.SampleLink">Link de compra</a></div>
+                    </div>
+                </div>
+            </a>
+        }
+        else
+        {
+            <div class="col-md-4">
+                <div class="well well-white mini-profile-widget">
+                    <div class="image-container">
+                        <img src="@present.ImageLink" class="avatar img-responsive" alt="@present.Title">
+                    </div>
+                    <div class="details">
+                        <h4>@present.Title</h4>
+                        <hr>
+                        <div>@present.Description</div>
+                        <div>Comprado!</div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+</div>
 }
 
 @code {
@@ -38,7 +59,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        presents = await Http.GetFromJsonAsync<List<Present>>("Present");
+        presents = await Http.GetFromJsonAsync<List<Present>>("Present/List");
     }
 
 }

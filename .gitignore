@@ -3,7 +3,7 @@
 ################################################################################
 
 /.vs
-/BirthList/.vs/BirthList/v16
+/BirthList/.vs
 /BirthList/BirthList/Client/obj
 /BirthList/BirthList/Server/obj
 /BirthList/BirthList/Shared/obj
@@ -14,3 +14,4 @@
 /BirthList/BirthList/Client/bin/Release/net5.0
 /BirthList/BirthList/Server/bin/Release/net5.0
 /BirthList/BirthList/Shared/bin/Release/net5.0
+/BirthList/.vs/BirthList/DesignTimeBuild/.dtbcache.v2

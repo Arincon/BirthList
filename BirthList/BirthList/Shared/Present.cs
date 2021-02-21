@@ -1,15 +1,18 @@
-﻿using System;
+﻿using Microsoft.Azure.Cosmos.Table;
+using System;
 
 namespace BirthList.Shared
 {
-    public class Present
+    public class Present : TableEntity
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int RequiredAmount { get; set; }
         public int RemainingAmount { get; set; }
-        public Uri ImageLink { get; set; }
-        public Uri SampleLink { get; set; }
+        public string ImageLink { get; set; }
+        public string SampleLink { get; set; }
+
+        [IgnoreProperty]
+        public int NewlyBought { get; set; }
     }
 }

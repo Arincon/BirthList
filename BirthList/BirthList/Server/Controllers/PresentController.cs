@@ -1,4 +1,5 @@
 ﻿using BirthList.Shared;
+using BirthList.Shared.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,23 +14,38 @@ namespace BirthList.Server.Controllers
     public class PresentController : ControllerBase
     {
         private readonly ILogger<PresentController> _logger;
+        private readonly ITableService _presentService;
+        private const string defaultPartitionKey = "1";
 
-        public PresentController(ILogger<PresentController> logger)
+        public PresentController(ILogger<PresentController> logger, ITableService presentService)
         {
             _logger = logger;
+            _presentService = presentService;
         }
 
         [HttpGet]
-        public IEnumerable<Present> Get()
+        [Route("List")]
+        public async Task<IEnumerable<Present>> GetAllAsync()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 10).Select(index => new Present
-            {
-                Id = index,
-                Title = $"Elemento {index}",
-                Description = $"Descripción elemento {index}"
-            })
-            .ToArray();
+            var presents = await _presentService.GetAllPresentsPartition(defaultPartitionKey);
+            return presents;
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<Present> GetPresentAsync(string id)
+        {
+            var present = await _presentService.GetPresent(defaultPartitionKey, id);
+            return present;
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<bool> UpdatePresentAsync([FromBody] Present updatedPresent, string id)
+        {
+            updatedPresent.RemainingAmount = updatedPresent.RemainingAmount - updatedPresent.NewlyBought;
+            var result = await _presentService.InsertOrMergePresentAsync(updatedPresent);
+            return result != null;
         }
     }
 }

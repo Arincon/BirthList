@@ -48,3 +48,17 @@ a, .btn-link {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+
+div.sidebar {
+    background: #ffd49e !important;
+}
+
+    div.sidebar .navbar {
+        background: #915810;
+    }
+
+        div.sidebar .navbar .nav-link {
+            color: black;
+            font-weight: bolder;
+        }
