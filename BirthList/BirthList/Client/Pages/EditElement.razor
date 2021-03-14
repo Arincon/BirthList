@@ -28,7 +28,7 @@ else
                 ¿Cuántos has comprado?:
                 <InputSelect @bind-Value="present.NewlyBought">
                     <option value="">Elige la cantidad...</option>
-                    @for (var i = 0; i <= present.RemainingAmount; i++)
+                    @for (var i = 1; i <= present.RemainingAmount; i++)
                         {
                         <option value="@i">@i</option>
                         }

@@ -1,0 +1,75 @@
+﻿a.present {
+    font-weight: 300;
+    text-decoration: none;
+    font-size: 18px;
+    min-width: calc(33% - 5px);
+    margin: 5px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--light-black);
+    background-color: var(--misty-rose);
+    transition-duration: 0.3s;
+}
+
+    a.present div.present-content {
+        height: 100%;
+        width: 100%;
+        position: relative;
+        padding-bottom: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        a.present div.present-content .details span {
+            font-weight: 600;
+        }
+
+        a.present div.present-content .details span.price {
+            font-weight: 800;
+            color: green;
+        }
+
+    a.present div.present-link {
+        background-color: var(--peach-puff);
+        color: var(--light-black);
+        font-weight: bold;
+        font-size: 22px;
+        width: 28%;
+        min-width: 140px;
+        padding: 10px;
+        margin: 5px auto;
+        transition-duration: 0.3s;
+        position: absolute;
+        bottom: 0px;
+        left: 36%;
+        text-align: center;
+    }
+
+        a.present div.present-link a {
+            text-decoration: none;
+        }
+
+        a.present div.present-link:hover {
+            background: var(--peach-crayola);
+            box-shadow: 0 0 8px rgb(0 0 0 / 60%);
+        }
+
+    a.present div.present-name {
+        font-size: 26px;
+        font-weight: 700;
+    }
+
+    a.present div.present-description {
+        height: 85px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+
+    a.present:hover {
+        box-shadow: 0 0 8px rgb(0 0 0 / 60%);
+    }

@@ -8,7 +8,13 @@
 
 @if (presents == null)
 {
-    <p><em>Loading...</em></p>
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+
+    </div>
 }
 else
 {

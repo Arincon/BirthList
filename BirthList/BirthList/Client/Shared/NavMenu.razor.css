@@ -8,18 +8,22 @@
 }
 
 .navbar-brand {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
+    margin: 0 auto;
+    color: var(--light-black);
+    margin-left: 10px;
+    font-weight: 700;
 }
 
 .oi {
     width: 2rem;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     vertical-align: text-top;
     top: -2px;
 }
 
 .nav-item {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     padding-bottom: 0.5rem;
 }
 
@@ -32,7 +36,7 @@
     }
 
     .nav-item ::deep a {
-        color: black;
+        color: var(--light-black);
         font-weight: bold;
         border-radius: 4px;
         height: 3rem;
@@ -43,13 +47,13 @@
 
         .nav-item ::deep a.active {
             background-color: rgba(255,255,255,0.85);
-            color: black;
+            color: var(--light-black);
             font-weight: bold;
         }
 
         .nav-item ::deep a:hover {
             background-color: rgba(255,255,255,0.5);
-            color: black;
+            color: var(--light-black);
             font-weight: bold;
         }
 

@@ -1,17 +1,32 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
+/* CSS HEX */
+:root {
+    --melon: #fec5bbff;
+    --pale-pink: #fcd5ceff;
+    --misty-rose: #fae1ddff;
+    --isabelline: #f8edebff;
+    --platinum: #e8e8e4ff;
+    --alabaster: #d8e2dcff;
+    --linen: #ece4dbff;
+    --champagne-pink: #ffe5d9ff;
+    --peach-puff: #ffd7baff;
+    --peach-crayola: #fec89aff;
+    --light-black: #1c1c1c;
+}
+
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 a, .btn-link {
-    color: #0366d6;
+    color: #000000;
 }
 
 .btn-primary {
     color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+    background-color: black;
+    border-color: black;
 }
 
 .content {
@@ -51,11 +66,11 @@ a, .btn-link {
 
 
 div.sidebar {
-    background: #ffd49e !important;
+    background: var(--peach-puff) !important;
 }
 
     div.sidebar .navbar {
-        background: #915810;
+        background: var(--peach-crayola);
     }
 
         div.sidebar .navbar .nav-link {
