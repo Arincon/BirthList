@@ -5,60 +5,55 @@
 <h1>¡Bienvenid@s!</h1>
 
 Ésta es la página creada para gestionar la lista de nacimiento de Bebé1.
-
-@if (presents == null)
-{
-    <div id="loader-wrapper">
-        <div id="loader"></div>
-
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
-
-    </div>
-}
-else
-{
-    <div class="row">
-        @foreach (var present in presents)
-        {
-            if (present.RemainingAmount > 0)
+<div class="main-content">
+    @if (presents == null)
+    {
+        <div class="loader center"></div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var present in presents)
             {
-                <a class="col-md-4" href="/present/@present.RowKey">
-                    <div class="well well-white mini-profile-widget">
-                        <div class="image-container">
-                            <img src="@present.ImageLink" class="avatar img-responsive" alt="@present.Title">
+                if (present.RemainingAmount > 0)
+                {
+                    <a class="col-md-4" href="/present/@present.RowKey">
+                        <div class="well well-white mini-profile-widget">
+                            <div class="image-container">
+                                <img src="@present.ImageLink" class="avatar img-responsive" alt="@present.Title">
+                            </div>
+                            <div class="details">
+                                <h4>@present.Title</h4>
+                                <hr>
+                                <div>@present.Description</div>
+                                <div>Precio orientativo: @present.EstimatedPrice €</div>
+                                <div>Comprados @(present.RequiredAmount-present.RemainingAmount) de @present.RequiredAmount</div>
+                                <div class="mg-top-10"><a target="_blank" href="@present.SampleLink">Link de compra</a></div>
+                            </div>
                         </div>
-                        <div class="details">
-                            <h4>@present.Title</h4>
-                            <hr>
-                            <div>@present.Description</div>
-                            <div>Precio orientativo: @present.EstimatedPrice €</div>
-                            <div>Comprados @(present.RequiredAmount-present.RemainingAmount) de @present.RequiredAmount</div>
-                            <div class="mg-top-10"><a target="_blank" href="@present.SampleLink">Link de compra</a></div>
+                    </a>
+                }
+                else
+                {
+                    <div class="col-md-4">
+                        <div class="well well-white mini-profile-widget">
+                            <div class="image-container">
+                                <img src="@present.ImageLink" class="avatar img-responsive" alt="@present.Title">
+                            </div>
+                            <div class="details">
+                                <h4>@present.Title</h4>
+                                <hr>
+                                <div>@present.Description</div>
+                                <div>Comprado!</div>
+                            </div>
                         </div>
                     </div>
-                </a>
-            }
-            else
-            {
-                <div class="col-md-4">
-                    <div class="well well-white mini-profile-widget">
-                        <div class="image-container">
-                            <img src="@present.ImageLink" class="avatar img-responsive" alt="@present.Title">
-                        </div>
-                        <div class="details">
-                            <h4>@present.Title</h4>
-                            <hr>
-                            <div>@present.Description</div>
-                            <div>Comprado!</div>
-                        </div>
-                    </div>
-                </div>
-            }
+                }
 
-        }
-    </div>
-}
+            }
+        </div>
+    }
+</div>
 
 @code {
     private List<Present> presents;

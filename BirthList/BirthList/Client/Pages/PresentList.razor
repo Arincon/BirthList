@@ -9,52 +9,54 @@
     <p>Aquí podrás ver la lista de regalos, con sus propiedades, y poder interactuar con ellos. </p>
     <p>Buscar:<input @bind-value="SearchText" @bind-value:event="oninput" /></p>
 </div>
-@if (!presents.Any())
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <div class="row">
-        @foreach (var present in FilteredPresents)
-        {
-            if (present.RemainingAmount > 0)
+<div class="main-content">
+    @if (!presents.Any())
+    {
+        <div class="loader center"></div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var present in FilteredPresents)
             {
-                <a class="col-md-3 present" href="/present/@present.RowKey">
-                    <div class="well present-content mini-profile-widget">
-                        <div class="image-container">
-                            <img src="@present.ImageLink" class="avatar img-responsive" alt="@present.Title">
+                if (present.RemainingAmount > 0)
+                {
+                    <a class="col-md-3 present" href="/present/@present.RowKey">
+                        <div class="well present-content mini-profile-widget">
+                            <div class="image-container">
+                                <img src="@present.ImageLink" class="avatar img-responsive" alt="@present.Title">
+                            </div>
+                            <div class="details">
+                                <div class="present-name">@present.Title</div>
+                                <div class="present-description">@present.Description</div>
+                                <div><span>Precio orientativo:</span> <span class="price">@present.EstimatedPrice €</span></div>
+                                <div><span>Comprados</span> @(present.RequiredAmount-present.RemainingAmount) <span>de</span> @present.RequiredAmount</div>
+                            </div>
+                            <div class="present-link"><a target="_blank" href="@present.SampleLink"><span class="oi oi-cart" aria-hidden="true"></span>Comprar</a></div>
                         </div>
-                        <div class="details">
-                            <div class="present-name">@present.Title</div>
-                            <div class="present-description">@present.Description</div>
-                            <div><span>Precio orientativo:</span> <span class="price">@present.EstimatedPrice €</span></div>
-                            <div><span>Comprados</span> @(present.RequiredAmount-present.RemainingAmount) <span>de</span> @present.RequiredAmount</div>
+                    </a>
+                }
+                else
+                {
+                    <div class="col-md-3">
+                        <div class="well well-white mini-profile-widget">
+                            <div class="image-container">
+                                <img src="@present.ImageLink" class="avatar img-responsive" alt="@present.Title">
+                            </div>
+                            <div class="details">
+                                <h4>@present.Title</h4>
+                                <hr>
+                                <div>@present.Description</div>
+                                <div>Comprado!</div>
+                            </div>
                         </div>
-                        <div class="present-link"><a target="_blank" href="@present.SampleLink"><span class="oi oi-cart" aria-hidden="true"></span>Comprar</a></div>
                     </div>
-                </a>
-            }
-            else
-            {
-                <div class="col-md-3">
-                    <div class="well well-white mini-profile-widget">
-                        <div class="image-container">
-                            <img src="@present.ImageLink" class="avatar img-responsive" alt="@present.Title">
-                        </div>
-                        <div class="details">
-                            <h4>@present.Title</h4>
-                            <hr>
-                            <div>@present.Description</div>
-                            <div>Comprado!</div>
-                        </div>
-                    </div>
-                </div>
-            }
+                }
 
-        }
-    </div>
-}
+            }
+        </div>
+    }
+</div>
 
 @code {
     private List<Present> presents = new List<Present>();
