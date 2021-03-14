@@ -73,3 +73,18 @@
     a.present:hover {
         box-shadow: 0 0 8px rgb(0 0 0 / 60%);
     }
+
+div.search {
+    font-weight: 800;
+    font-size: 20px;
+    margin-top: -65px;
+}
+
+div.search span{
+    font-size: 28px;
+    margin-right: 10px;
+}
+
+    div.search input {
+        min-width: 260px;
+    }

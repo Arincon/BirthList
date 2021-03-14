@@ -74,10 +74,16 @@
     }
 }
 
-.content, .main-content{
+.content, .main-content {
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
 }
+
+    .main-content .row {
+        max-height: 799px;
+        overflow: scroll;
+        overflow-x: hidden;
+    }
 
 .center {
     position: fixed;
@@ -87,4 +93,11 @@
     transform: -webkit-translate(-50%, -50%);
     transform: -moz-translate(-50%, -50%);
     transform: -ms-translate(-50%, -50%);
+}
+
+.right {
+    position: absolute;
+    right: 0px;
+    width: 400px;
+    padding: 10px;
 }

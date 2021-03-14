@@ -3,11 +3,12 @@
 @using System.Text.RegularExpressions;
 @inject HttpClient Http
 
-<h1>Lista de Regalos</h1>
-
 <div>
-    <p>Aquí podrás ver la lista de regalos, con sus propiedades, y poder interactuar con ellos. </p>
-    <p>Buscar:<input @bind-value="SearchText" @bind-value:event="oninput" /></p>
+    <h1>Lista de Regalos</h1>
+    <div class="search right"><span>Buscar:</span><input @bind-value="SearchText" @bind-value:event="oninput" /></div>
+</div>
+<div>
+    <p>Aquí podrás ver la lista de regalos, con sus propiedades, y poder interactuar con ellos. </p>    
 </div>
 <div class="main-content">
     @if (!presents.Any())
