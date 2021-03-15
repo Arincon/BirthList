@@ -1,0 +1,139 @@
+﻿.present-details {
+    display: flex;
+    flex-direction: row;
+}
+
+.present-title {
+    font-size: 24px;
+}
+
+.present-info {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    line-height: 35px;
+    margin-left: 15px;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.present-id {
+    position: absolute;
+    right: 40px;
+    font-size: 30px;
+    top: 75px;
+    font-weight: 800;
+}
+
+.present-price {
+    margin-top: 10px;
+    font-weight: 900;
+    font-size: 24px;
+    color: green;
+}
+
+.present-info .present-description {
+    /*line-height: 25px;*/
+    display: contents;
+}
+
+.present-purchased {
+    font-style: italic;
+}
+
+span.purchased-amount {
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.present-image {
+    transition: transform 0.3s ease;
+    max-width: 350px;
+    object-fit: contain;
+}
+
+
+    .present-image:hover {
+        -webkit-transform: scale(1.4);
+        transform: scale(1.4);
+    }
+
+span.description-text {
+    font-weight: 600;
+    width: 250px;
+    font-size: 20px;
+    display: inline-block;
+    color: black;
+}
+
+.additional-info {
+    display: table;
+}
+
+    .additional-info label span.description-text {
+        display: table;
+        min-width: 600px;
+    }
+
+.message-info {
+    min-width: 600px;
+    resize: both;
+}
+
+div.present-purchase-link, div.submit-button {
+    background-color: var(--peach-puff);
+    color: var(--light-black);
+    font-weight: bold;
+    font-size: 22px;
+    width: 28%;
+    min-width: 140px;
+    padding: 10px;
+    margin: 20px 5px;
+    transition-duration: 0.3s;
+    bottom: 0px;
+    left: 0%;
+    text-align: center;
+}
+
+    div.present-purchase-link a, div.submit-button button {
+        text-decoration: none;
+        background: none;
+        border: none;
+        width: 100%;
+        height: 100%;
+        font-weight: bold;
+        font-size: 22px;
+    }
+
+    div.present-purchase-link:hover, div.submit-button:hover {
+        background: var(--peach-crayola);
+        box-shadow: 0 0 8px rgb(0 0 0 / 60%);
+    }
+
+/* MEDIA QUERIES */
+@media all and (max-width: 640.98px) {
+    .present-id {
+        position: absolute;
+        right: 10px;
+        font-size: 22px;
+        top: 55px;
+        font-weight: 800;
+    }
+
+    .content, .main-content {
+        width: 100%;
+        padding-top: 5px;
+        padding-bottom: 10px;
+    }
+
+    .present-image {
+        transition: transform 0.3s ease;
+        max-width: 250px;
+        object-fit: contain;
+    }
+
+    .present-details {
+        display: block;
+        flex-direction: row;
+    }
+}

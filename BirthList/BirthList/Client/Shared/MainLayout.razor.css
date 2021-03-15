@@ -47,6 +47,7 @@
     .top-row a, .top-row .btn-link {
         margin-left: 0;
     }
+
 }
 
 @media (min-width: 641px) {
@@ -55,14 +56,14 @@
     }
 
     .sidebar {
-        width: 250px;
+        width: 252px;
         height: 100vh;
         position: sticky;
         top: 0;
     }
 
     .top-row {
-        position: sticky;
+        /*position: sticky;*/
         top: 0;
         z-index: 1;
     }
@@ -72,3 +73,5 @@
         padding-right: 1.5rem !important;
     }
 }
+
+

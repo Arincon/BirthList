@@ -24,6 +24,7 @@ namespace BirthList.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<ITableService, TableService>();
+            services.AddSingleton<IMailService, MailService>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

@@ -5,8 +5,10 @@ namespace BirthList.Shared.Services
 {
     public interface ITableService
     {
-        Task<Present> GetPresent(string partitionKey, string rowKey);
-        Task<List<Present>> GetAllPresentsPartition(string partitionId);
-        Task<Present> InsertOrMergePresentAsync(Present entity);
+        Task<WishlistPresent> GetPresent(string partitionKey, string rowKey);
+        Task<List<WishlistPresent>> GetAllPresentsPartition(string partitionId);
+        Task<List<PurchasedPresent>> GetAllPurchasesPartition(string partitionId);
+        Task<WishlistPresent> InsertOrMergePresentAsync(WishlistPresent entity);
+        Task<PurchasedPresent> InsertOrMergePresentAsync(PurchasedPresent entity);
     }
 }

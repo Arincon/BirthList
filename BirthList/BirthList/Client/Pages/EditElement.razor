@@ -7,47 +7,62 @@
 
 @if (present == null)
 {
-    <p><em>Loading...</em></p>
+    <div class="loader center"></div>
 }
 else
 {
-    <p>Edición de Regalo: @present.RowKey</p>
-    <img src="@present.ImageLink" class="avatar img-responsive" alt="@present.Title">
-    <p>Nombre: @present.Title</p>
-    <p>Description: @present.Description</p>
-    <p>Precio orientativo: @present.EstimatedPrice €</p>
-    <p>Comprados @(present.RequiredAmount - present.RemainingAmount) de @present.RequiredAmount</p>
-    <p class="mg-top-10"><a target="_blank" href="@present.SampleLink">Link de compra</a></p>
+    <div class="present-details">
+        <img src="@present.ImageLink" class="avatar present-image img-responsive" alt="@present.Title">
+        <div class="present-id">ID: @present.RowKey</div>
+        <div class="present-info">
+            <div class="present-title"><span class="description-text">Nombre:</span> @present.Title</div>
+            <div class="present-description"><span class="description-text">Descripción:</span> @present.Description</div>
+            <div class="present-price"><span class="description-text">Precio orientativo:</span> @present.EstimatedPrice €</div>
+            <div class="present-purchased">Comprados <span class="purchased-amount">@(present.RequiredAmount - present.RemainingAmount)</span> de <span class="purchased-amount">@present.RequiredAmount</span></div>
+            <div class="present-purchase-link mg-top-10"><a target="_blank" href="@present.SampleLink"><span class="oi oi-cart" aria-hidden="true"></span>Sugerencia de compra</a></div>
 
-    <EditForm Model="@present" OnValidSubmit="@HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
+            <EditForm Model="@present" OnValidSubmit="@HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
 
-        <p>
-            <label>
-                ¿Cuántos has comprado?:
-                <InputSelect @bind-Value="present.NewlyBought">
-                    <option value="">Elige la cantidad...</option>
-                    @for (var i = 1; i <= present.RemainingAmount; i++)
-                        {
-                        <option value="@i">@i</option>
-                        }
-                </InputSelect>
-            </label>
-        </p>
-        <button type="submit">Informar a los padres...</button>
-    </EditForm>
+                <div class="bought">
+                    <label>
+                        <span class="description-text">
+                            ¿Cuántos has comprado?:
+                        </span>
+                            <InputSelect @bind-Value="present.NewlyBought">
+                                <option value="">Elige la cantidad...</option>
+                                @for (var i = 1; i <= present.RemainingAmount; i++)
+                                    {
+                                    <option value="@i">@i</option>
+                                    }
+                            </InputSelect>
+</label>
+                </div>
+                <div class="additional-info">
+                    <label>
+                        <span class="description-text">
+                            Mensaje para los padres:
+                        </span>
+                            <InputTextArea style="min-width: 300px; resize: both;" rows="5" Placeholder="Opcional" @bind-Value="present.PurchaseInfo">
+                            </InputTextArea>
+</label>
+                </div>
+                <div class="submit-button"><button type="submit"><span class="oi oi-info" aria-hidden="true"></span>Informar a los padres</button></div>
+            </EditForm>
+        </div>
+    </div>
 }
 
 @code {
     [Parameter]
     public string Id { get; set; }
 
-    private Present present;
+    private WishlistPresent present;
 
     protected override async Task OnInitializedAsync()
     {
-        present = await Http.GetFromJsonAsync<Present>($"Present/{Id}");
+        present = await Http.GetFromJsonAsync<WishlistPresent>($"Present/{Id}");
         present.NewlyBought = 0;
     }
 
@@ -63,7 +78,7 @@ else
         else
         {
             // Process the form
-            var result = await Http.PutAsJsonAsync<Present>($"Present/{Id}", present);
+            var result = await Http.PutAsJsonAsync<WishlistPresent>($"Present/{Id}", present);
             if (result.IsSuccessStatusCode)
             {
                 NavigationManager.NavigateTo("/presentlist");
