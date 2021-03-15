@@ -214,4 +214,22 @@ a.present:hover, div.present:hover {
     div.intro-text {
         display: none;
     }
+
+    a.present div.present-name, div.present div.present-name {
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    a.present {
+        font-size: 14px;
+    }
+
+    .mini-profile-widget .image-container .avatar {
+        width: 150px;
+        height: 150px;
+        display: block;
+        margin: 5px auto;
+        background: white;
+        object-fit: contain;
+    }
 }

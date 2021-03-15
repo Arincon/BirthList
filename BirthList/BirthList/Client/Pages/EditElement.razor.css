@@ -130,10 +130,32 @@ div.present-purchase-link, div.submit-button {
         transition: transform 0.3s ease;
         max-width: 250px;
         object-fit: contain;
+        margin: 0 auto;
+        display: block;
     }
 
     .present-details {
         display: block;
         flex-direction: row;
+    }
+
+    div.present-purchase-link, div.submit-button {
+        background-color: var(--peach-puff);
+        color: var(--light-black);
+        font-weight: bold;
+        font-size: 22px;
+        width: 28%;
+        min-width: 300px;
+        padding: 10px;
+        margin: 20px 5px;
+        transition-duration: 0.3s;
+        bottom: 0px;
+        left: 0%;
+        text-align: center;
+    }
+
+    h1, .h1 {
+        font-size: calc(1.375rem + 1.5vw);
+        margin-top: -15px;
     }
 }
